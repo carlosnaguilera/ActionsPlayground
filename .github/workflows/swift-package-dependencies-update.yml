@@ -1,0 +1,32 @@
+name: Swift Package Dependencies Update
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  # This workflow contains a single job called "dependencies"  
+  dependencies:
+    runs-on: macos-11
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Resolve Dependencies
+        id: resolution
+        uses: GetSidetrack/action-xcodeproj-spm-update@main
+        with:
+          forceResolution: true
+          failWhenOutdated: false
+
+      - name: Create Pull Request
+        if: steps.resolution.outputs.dependenciesChanged == 'true'
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch: 'feature/updatePackageDependencies'
+          delete-branch: true
+          commit-message: 'Update Xcode Dependencies'
+          title: 'Updated Xcode Dependencies'
