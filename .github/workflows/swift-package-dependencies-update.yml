@@ -1,7 +1,8 @@
 name: Swift Package Dependencies Update
 
 on:
-  workflow_dispatch:
+  schedule:
+      - cron: '16 13 * * 1' # every monday AM 13:16 UTC
 
 permissions:
   contents: write
@@ -28,5 +29,6 @@ jobs:
         with:
           branch: 'feature/updatePackageDependencies'
           delete-branch: true
-          commit-message: 'Update Xcode Dependencies'
-          title: 'Updated Xcode Dependencies'
+          commit-message: '⬆️ Update SPM Dependencies'
+          title: 'chore: Updated SPM Dependencies'
+
