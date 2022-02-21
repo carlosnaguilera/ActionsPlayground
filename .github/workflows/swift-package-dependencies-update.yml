@@ -2,7 +2,7 @@ name: Swift Package Dependencies Update
 
 on:
   schedule:
-      - cron: '32 14 * * *' # at 14:32 UTC
+      - cron: '55 7 * * 2' # every Tuesday at 7:55 UTC
 
 permissions:
   contents: write
